@@ -1,0 +1,30 @@
+{
+  "boss": true,
+  "node": true,
+  "curly": true,
+  "devel": true,
+  "eqeqeq": true,
+  "forin": true,
+  "globals": {
+    "document": true,
+    "fetch": true,
+    "global": true,
+    "io": true,
+    "myrios": true,
+    "navigator": true,
+    "Promise": true,
+    "window": true,
+    "XMLHttpRequest": true
+  },
+  "immed": true,
+  "newcap": true,
+  "noarg": true,
+  "noempty": true,
+  "nonew": false,
+  "plusplus": false,
+  "quotmark": "single",
+  "trailing": true,
+  "undef": true,
+  "unused": true,
+  "sub": true
+}

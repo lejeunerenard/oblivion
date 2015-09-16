@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Oblivion example</title>
+</head>
+<body>
+   <div class="container">
+   </div>
+   <script src="../oblivion.js"></script>
+   <script>
+      var app = oblivion({
+         branch: 'gh-pages',
+         blogPath: 'example/blogs',
+         repo: 'lejeunerenard/oblivion'
+      });
+      app.get_posts().then(function(output) {
+         document.querySelector('.container').innerHTML = app.render_posts(output)
+      });
+   </script>
+</body>
+</html>
