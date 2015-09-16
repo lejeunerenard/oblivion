@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Oblivion example</title>
+   <script src="../node_modules/whatwg-fetch/fetch.js"></script>
+   <script src="../oblivion.js"></script>
+</head>
+<body>
+   <div class="container">
+   </div>
+   <script>
+      var app = oblivion();
+      app.get_posts().then(function(output) {
+         document.querySelector('.container').innerHTML = app.render_posts(output)
+      });
+   </script>
+</body>
+</html>
