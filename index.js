@@ -1,7 +1,7 @@
 'use strict';
 
-var marked = require('meta-marked');
 var Github = require('github-api');
+var Post = require('./models/post.js');
 
 require('es6-promise').polyfill();
 
@@ -43,31 +43,33 @@ Oblivion.prototype.get_posts = function get_posts() {
          var i = files.length;
          while ( i -- ) {
             var file = files[i];
-            posts.push( new Promise( function(resolve, reject) {
-               self.repo.read( self.branch, file.path, function(err, data) {
-                  if ( err ) { return reject( err ); }
-                  resolve(data);
-               });
-            }) );
+            posts.push(new Post({
+               path: file.path,
+               oblivion: self
+            }));
          }
 
-         resolve(Promise.all(posts));
+         resolve(posts);
       });
-
    });
 };
 
 Oblivion.prototype.render_posts = function render_posts( posts ) {
-   var i      = posts.length,
-       output = '';
+   var fetches = posts.map(function(post) {
+      return post.fetch();
+   });
 
-   while ( i -- ) {
-      var post = marked(posts[i]);
-      output += post.html;
-      console.log('meta', post.meta);
-   }
+   return Promise.all(fetches).then(function(outputs) {
+      var sorted = outputs.sort(function(a, b) {
+         return b.meta.Order - a.meta.Order;
+      });
 
-   return output;
+      return sorted.reduce( function(prev, current) {
+         return prev + current.html;
+      }, '');
+   }, function(err) {
+      throw err;
+   });
 };
 
 module.exports = Oblivion;

@@ -15,7 +15,9 @@
          repo: 'lejeunerenard/oblivion'
       });
       app.get_posts().then(function(output) {
-         document.querySelector('.container').innerHTML = app.render_posts(output)
+         app.render_posts(output).then(function(html) {
+            document.querySelector('.container').innerHTML = html;
+         });
       });
    </script>
 </body>
