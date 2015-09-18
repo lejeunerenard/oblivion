@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "browserify --standalone 'oblivion' index.js -d -p [minifyify --map oblivion.map.json --output oblivion.map.json] > oblivion.js",
-    "watch": "watchify --standalone 'oblivion' index.js -o oblivion.js --debug"
+    "watch": "watchify --standalone 'oblivion' index.js -d -p [minifyify --map oblivion.map.json --output oblivion.map.json] -o oblivion.js"
   },
   "repository": {
     "type": "git",
