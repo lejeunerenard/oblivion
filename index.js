@@ -21,7 +21,13 @@ function Oblivion( options ) {
    this.repoUser = userRepo[0];
    this.repoName = userRepo[1];
 
-   this.github = new Github({});
+   this.username = options.username;
+   this.password = options.password;
+
+   this.github = new Github({
+      username: this.username,
+      password: this.password
+   });
 
    this.repo = this.github.getRepo(this.repoUser, this.repoName);
 }
